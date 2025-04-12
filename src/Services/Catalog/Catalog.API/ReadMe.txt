@@ -1,5 +1,6 @@
 
 Project architecture style :
+
 We use Vertical Slice Architecture for this Service 
 we organize our code into feature folder , each feature encapsulated in single .cs file
 
