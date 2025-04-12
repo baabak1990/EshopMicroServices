@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using BuildingBlock.CQRS;
+using MediatR;
 
 namespace Catalog.API.Products.GetProductByCategory
 {
@@ -8,13 +9,13 @@ namespace Catalog.API.Products.GetProductByCategory
         List<string> Category,
         string Description,
         string ImageFile,
-        decimal Price) : IRequest<CreateProductResult>;
+        decimal Price) : ICommand<CreateProductResult>;
 
     public record CreateProductResult(Guid Id);
 
-    internal class GetProductByCategoryEndpoint : IRequestHandler<CreateProductCommand, CreateProductResult>
+    internal class GetProductByCategoryEndpoint : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
-        public Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
