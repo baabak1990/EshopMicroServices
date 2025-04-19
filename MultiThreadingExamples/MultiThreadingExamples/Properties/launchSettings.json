@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MultiThreadingExamples": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
