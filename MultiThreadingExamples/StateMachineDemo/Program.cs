@@ -9,18 +9,20 @@ namespace StateMachineDemo
             Console.WriteLine("Hello, World!");
         }
 
-        static async void FoodAsync()
+        static async void FooAsync()
         {
 
         }
-
-        static void Food()
+         
+        static void Foo()
         {
-            
+            var stateMachine = new FooAsyncStateMachine();
+            stateMachine.MethodBuilder = new AsyncVoidMethodBuilder();
         }
 
-        struct FoodAsyncStateMachine : IAsyncStateMachine
-        { 
+        struct FooAsyncStateMachine : IAsyncStateMachine
+        {
+            public AsyncVoidMethodBuilder MethodBuilder;
             public void MoveNext()
             {
                 throw new NotImplementedException();
