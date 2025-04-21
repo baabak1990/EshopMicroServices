@@ -11,6 +11,8 @@ namespace AsyncSkratch
         private readonly Lock _lock = new();
         private bool _completed;
         private Exception _exception;
+        private Action? _action;
+        private ExecutionContext? _context;
 
         public bool IsCompleted
         {
