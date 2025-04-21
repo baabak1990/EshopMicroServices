@@ -8,7 +8,7 @@ namespace AsyncSkratch
 {
     public class DomeTrainTask
     {
-        private readonly Lock _lock = new();
+        private readonly Lock _lock = new(); //Lock class ensure  that to different thread don`t make any changes in this class
         private bool _completed;
         private Exception _exception;
         private Action? _action;
@@ -34,7 +34,7 @@ namespace AsyncSkratch
                 try
                 {
                     action();
-                    task.SetResult(); 
+                    task.SetResult();
                 }
                 catch (Exception e)
                 {
@@ -46,7 +46,7 @@ namespace AsyncSkratch
 
         public DomeTrainTask Continue(Action action)
         {
-            DomeTrainTask task=new();
+            DomeTrainTask task = new();
             lock (_lock)
             {
                 if (_completed)
@@ -65,29 +65,27 @@ namespace AsyncSkratch
                         }
                     });
                 }
+                else
+                {
+                    _action = action;
+                    _context = ExecutionContext.Capture();
+                }
             }
 
             return task;
         }
-        public void SetResult()
+
+        public void SetResult() => CompleteTask(null);
+        public void SetException(Exception exception) => CompleteTask(exception);
+        private void CompleteTask(Exception? exception)
         {
             lock (_lock)
             {
                 if (_completed)
                     throw new InvalidOperationException("DomeTrainTask already completed .Cannot set result for it");
-                _completed = true;
+
             }
 
-        }
-
-        public void SetException(Exception exception)
-        {
-            lock (_lock)
-            {
-                if (_completed)
-                    throw new InvalidOperationException("DomeTrainTask already completed .Cannot set result for it");
-                exception = _exception;
-            }
         }
     }
 }
