@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace AsyncSkratch
         private bool _completed;
         private Exception _exception;
         private Action? _action;
-        private ExecutionContext? _context;
+        private ExecutionContext? _context; // in short is all the security information or crucial information to give to thread 
 
         public bool IsCompleted
         {
@@ -75,6 +76,25 @@ namespace AsyncSkratch
             return task;
         }
 
+        public void Wait()
+        {
+            ManualResetEventSlim resetEventSlim = null;
+            lock (_lock)
+            {
+                if (!_completed)
+                {
+                    resetEventSlim=new ManualResetEventSlim();
+                    Continue(() => resetEventSlim.Set());
+                }
+
+            }
+
+            resetEventSlim?.Wait();
+
+            if(_exception is not  null)
+                ExceptionDispatchInfo.Throw(_exception);
+        }
+
         public void SetResult() => CompleteTask(null);
         public void SetException(Exception exception) => CompleteTask(exception);
         private void CompleteTask(Exception? exception)
@@ -84,6 +104,21 @@ namespace AsyncSkratch
                 if (_completed)
                     throw new InvalidOperationException("DomeTrainTask already completed .Cannot set result for it");
 
+
+                _completed=true;
+                _exception = exception;
+
+                if (_action is not null)
+                {
+                    if (_context is null)
+                    {
+                        _action.Invoke();
+                    }
+                    else
+                    {
+                        ExecutionContext.Run(_context,state=>((Action)state)?.Invoke(),_action);
+                    }
+                }
             }
 
         }
