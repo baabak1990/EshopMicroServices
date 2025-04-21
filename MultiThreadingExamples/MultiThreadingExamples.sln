@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiThreadingExamples", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateMachineDemo", "StateMachineDemo\StateMachineDemo.csproj", "{6F668A99-4EF2-4B3F-8C47-D678652004F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncSkratch", "AsyncSkratch\AsyncSkratch.csproj", "{601D3947-9BDA-4FD1-ACA0-099359814F26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6F668A99-4EF2-4B3F-8C47-D678652004F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F668A99-4EF2-4B3F-8C47-D678652004F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F668A99-4EF2-4B3F-8C47-D678652004F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{601D3947-9BDA-4FD1-ACA0-099359814F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601D3947-9BDA-4FD1-ACA0-099359814F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{601D3947-9BDA-4FD1-ACA0-099359814F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601D3947-9BDA-4FD1-ACA0-099359814F26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
