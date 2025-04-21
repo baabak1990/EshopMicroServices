@@ -9,30 +9,7 @@ namespace StateMachineDemo
             Console.WriteLine("Hello, World!");
         }
 
-        static async void FooAsync()
-        {
-
-        }
-         
-        static void Foo()
-        {
-            var stateMachine = new FooAsyncStateMachine();
-            stateMachine.MethodBuilder = new AsyncVoidMethodBuilder();
-        }
-
-        struct FooAsyncStateMachine : IAsyncStateMachine
-        {
-            public AsyncVoidMethodBuilder MethodBuilder;
-            public void MoveNext()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void SetStateMachine(IAsyncStateMachine stateMachine)
-            {
-                throw new NotImplementedException();
-            }
-        }
+      //we can use Task.WhenAll(put as much as we want methods here) to use parallel in C#
 
     }
 
